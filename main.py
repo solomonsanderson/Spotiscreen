@@ -8,6 +8,7 @@ import spotipy
 import spotipy.util as util
 from spotipy.oauth2 import SpotifyClientCredentials
 import credentials
+import time
 
 
 scope = "user-read-playback-state"
@@ -17,19 +18,21 @@ token = util.prompt_for_user_token(username= credentials.username, scope = scope
 sp = spotipy.Spotify(auth=token)
 
 
-playback = sp.current_playback()
-
-if playback == None:
-    #put some function here, potentiall display weather data or similar
-    pass
-
-else:
-    # print(playback)
+while not False:
+    playback = sp.current_playback()
     n_playback = pd.json_normalize(playback)
-    album_art_url = n_playback['item.album.images'][0][0]["url"]
-    print(n_playback['item.album.images'][0][0]["url"])
-    response = requests.get(album_art_url)
-    file = open("album_art.png", "wb")
-    file.write(response.content)
-    file.close()
+    playing = n_playback['is_playing'][0]
+    print(playing)
+    # n_playback.to_csv('test.csv')
+    if playing == False:
+        print("paused")
 
+    elif playing == True:
+        album_art_url = n_playback['item.album.images'][0][0]["url"]
+        print(n_playback['item.album.images'][0][0]["url"])
+        response = requests.get(album_art_url)
+        file = open("album_art.png", "wb")
+        file.write(response.content)
+        file.close()
+        print("playing")
+    time.sleep(1)

@@ -9,6 +9,7 @@ import spotipy.util as util
 from spotipy.oauth2 import SpotifyClientCredentials
 import credentials
 import time
+import sys
 
 
 scope = "user-read-playback-state"
@@ -19,25 +20,27 @@ sp = spotipy.Spotify(auth=token)
 
 prev_album_art_url = None
 while not False:
-    print("while")
-    playback = sp.current_playback()
-    n_playback = pd.json_normalize(playback)
-    playing = n_playback['is_playing'][0]
-    # print(playing)
-    # n_playback.to_csv('test.csv')
-    if playing == False:
-        print("paused")
+    try:
+        playback = sp.current_playback()
+        n_playback = pd.json_normalize(playback)
+        playing = n_playback['is_playing'][0]
+        # print(playing)
+        # n_playback.to_csv('test.csv')
+        if playing == False:
+            print("paused")
 
-    elif playing == True:
-        album_art_url = n_playback['item.album.images'][0][0]["url"]
-        if album_art_url == prev_album_art_url:
-            print("Playing, No Change")
-        elif album_art_url != prev_album_art_url:
-            print("Downloading Album Cover")
-            print(n_playback['item.album.images'][0][0]["url"])
-            response = requests.get(album_art_url)
-            file = open("album_art.png", "wb")
-            file.write(response.content)
-            file.close()
-        prev_album_art_url = album_art_url
+        elif playing == True:
+            album_art_url = n_playback['item.album.images'][0][0]["url"]
+            if album_art_url == prev_album_art_url:
+                print("Playing, No Change")
+            elif album_art_url != prev_album_art_url:
+                print("Downloading Album Cover")
+                print(n_playback['item.album.images'][0][0]["url"])
+                response = requests.get(album_art_url)
+                file = open("album_art.png", "wb")
+                file.write(response.content)
+                file.close()
+            prev_album_art_url = album_art_url
+    except:
+        print(f"An {sys.exc_info()[0]} error occured")
     time.sleep(1)

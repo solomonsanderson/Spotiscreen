@@ -30,7 +30,7 @@ while not False:
     elif playing == True:
         album_art_url = n_playback['item.album.images'][0][0]["url"]
         if album_art_url == prev_album_art_url:
-            pass
+            print("Playing, No Change")
         elif album_art_url != prev_album_art_url:
             print("Downloading Album Cover")
             print(n_playback['item.album.images'][0][0]["url"])
@@ -38,6 +38,5 @@ while not False:
             file = open("album_art.png", "wb")
             file.write(response.content)
             file.close()
-            print("playing")
         prev_album_art_url = album_art_url
     time.sleep(1)

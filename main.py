@@ -10,6 +10,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import credentials
 import time
 import sys
+import subprocess
 
 
 scope = "user-read-playback-state"
@@ -24,8 +25,8 @@ while not False:
         playback = sp.current_playback()
         n_playback = pd.json_normalize(playback)
         playing = n_playback['is_playing'][0]
-        # print(playing)
-        # n_playback.to_csv('test.csv')
+
+
         if playing == False:
             print("paused")
 
@@ -40,6 +41,7 @@ while not False:
                 file = open("album_art.png", "wb")
                 file.write(response.content)
                 file.close()
+                image = subprocess.Popen("fim -a album_art.png", shell = True)
             prev_album_art_url = album_art_url
     except:
         print(f"An {sys.exc_info()[0]} error occured")

@@ -19,6 +19,7 @@ sp = spotipy.Spotify(auth=token)
 
 prev_album_art_url = None
 while not False:
+    print("while")
     playback = sp.current_playback()
     n_playback = pd.json_normalize(playback)
     playing = n_playback['is_playing'][0]

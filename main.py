@@ -22,7 +22,7 @@ while not False:
     playback = sp.current_playback()
     n_playback = pd.json_normalize(playback)
     playing = n_playback['is_playing'][0]
-    print(playing)
+    # print(playing)
     # n_playback.to_csv('test.csv')
     if playing == False:
         print("paused")
@@ -32,6 +32,7 @@ while not False:
         if album_art_url == prev_album_art_url:
             pass
         elif album_art_url != prev_album_art_url:
+            print("Downloading Album Cover")
             print(n_playback['item.album.images'][0][0]["url"])
             response = requests.get(album_art_url)
             file = open("album_art.png", "wb")

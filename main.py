@@ -18,9 +18,10 @@ redirect = "http://localhost:7777/callback"
 redirect_uri = "http://localhost:8888/callback/"
 token = util.prompt_for_user_token(username= credentials.username, scope = scope,redirect_uri=  redirect_uri, client_id = credentials.client_id, client_secret= credentials.client_secret)
 sp = spotipy.Spotify(auth=token)
-
+print(sys.argv)
 prev_album_art_url = None
-while not False:
+token_time = 0 
+while True:
     try:
         playback = sp.current_playback()
         if playback == None:
@@ -45,4 +46,12 @@ while not False:
                 prev_album_art_url = album_art_url
     except:
         print(f"An {sys.exc_info()[0]} error occured")
+    
+    token_time += 1 
+    if token_time == 1000:
+        print(token)
+        sp = spotipy.Spotify(auth=token)
+        print(sp)
+        print("token refreshed")
+        token_time = 0 
     time.sleep(1)

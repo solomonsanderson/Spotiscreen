@@ -24,39 +24,36 @@ sp = spotipy.Spotify(auth_manager=auth_manager)
 prev_album_art_url = None
 
 while True:
-    try:
-        token_info = auth_manager.get_cached_token()
-        if auth_manager.is_token_expired(token_info) == True:
-            auth_manager = SpotifyOAuth(username= credentials.username, scope = scope,redirect_uri=redirect_uri, client_id = credentials.client_id, client_secret= credentials.client_secret)
-            sp = spotipy.Spotify(auth_manager=auth_manager)
-            print("token refreshed")
 
-        #    print(auth_manager.get_access_token(as_dict=False))
-
-
-        playback = sp.current_playback()
-        if playback == None:
+    token_info = auth_manager.get_cached_token()
+    if auth_manager.is_token_expired(token_info) == True:
+        auth_manager = SpotifyOAuth(username= credentials.username, scope = scope,redirect_uri=redirect_uri, client_id = credentials.client_id, client_secret= credentials.client_secret)
+        sp = spotipy.Spotify(auth_manager=auth_manager)
+        print("token refreshed")
+    #    print(auth_manager.get_access_token(as_dict=False))
+    playback = sp.current_playback()
+    if playback == None:
+        print("paused")
+    else:
+        n_playback = pd.json_normalize(playback)
+        playing = n_playback['is_playing'][0]
+        if playing == False:
             print("paused")
-        else:
-            n_playback = pd.json_normalize(playback)
-            playing = n_playback['is_playing'][0]
-            if playing == False:
-                print("paused")
-            elif playing == True:
-                album_art_url = n_playback['item.album.images'][0][0]["url"]
-                if album_art_url == prev_album_art_url:
-                    print("Playing, No Change")
-                elif album_art_url != prev_album_art_url:
-                    print("Downloading Album Cover")
-                    print(n_playback['item.album.images'][0][0]["url"])
-                    response = requests.get(album_art_url)
-                    file = open("album_art.png", "wb")
-                    file.write(response.content)
-                    file.close()
-                    image = subprocess.Popen("fim -a album_art.png", shell = True)
-                prev_album_art_url = album_art_url
-    except:
-        print(f"An {sys.exc_info()} error occured")
+        elif playing == True:
+            album_art_url = n_playback['item.album.images'][0][0]["url"]
+            if album_art_url == prev_album_art_url:
+                print("Playing, No Change")
+            elif album_art_url != prev_album_art_url:
+                print("Downloading Album Cover")
+                print(n_playback['item.album.images'][0][0]["url"])
+                response = requests.get(album_art_url)
+                file = open("album_art.png", "wb")
+                file.write(response.content)
+                file.close()
+                image = subprocess.Popen("fim -a album_art.png", shell = True)
+            prev_album_art_url = album_art_url
+    # except:
+        # print(f"An {sys.exc_info()} error occured")
     
 
     time.sleep(1)

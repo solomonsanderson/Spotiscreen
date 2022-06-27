@@ -26,9 +26,8 @@ prev_album_art_url = None
 while True:
 
     token_info = auth_manager.get_cached_token()
-    if auth_manager.is_token_expired(token_info) == True:
-        auth_manager = SpotifyOAuth(username= credentials.username, scope = scope,redirect_uri=redirect_uri, client_id = credentials.client_id, client_secret= credentials.client_secret)
-        sp = spotipy.Spotify(auth_manager=auth_manager)
+    if auth_manager.is_token_expired(token_info) == True or token_info == None:
+        auth_manager.get_access_token()
         print("token refreshed")
     #    print(auth_manager.get_access_token(as_dict=False))
     playback = sp.current_playback()

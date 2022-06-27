@@ -30,10 +30,10 @@ while True:
             auth_manager = SpotifyOAuth(username= credentials.username, scope = scope,redirect_uri=redirect_uri, client_id = credentials.client_id, client_secret= credentials.client_secret)
             sp = spotipy.Spotify(auth_manager=auth_manager)
             print("token refreshed")
-             
+
         #    print(auth_manager.get_access_token(as_dict=False))
-    
-    
+
+
         playback = sp.current_playback()
         if playback == None:
             print("paused")
@@ -56,7 +56,7 @@ while True:
                     image = subprocess.Popen("fim -a album_art.png", shell = True)
                 prev_album_art_url = album_art_url
     except:
-        print(f"An {sys.exc_info()[0]} error occured")
+        print(f"An {sys.exc_info()} error occured")
     
 
     time.sleep(1)

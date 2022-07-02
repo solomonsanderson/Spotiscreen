@@ -45,7 +45,7 @@ while True:
             elif playing == True:
                 album_art_url = n_playback['item.album.images'][0][0]["url"]
                 if album_art_url == prev_album_art_url:
-                    print("Playing, No Change")
+                    print("Playing, No C    hange")
                 elif album_art_url != prev_album_art_url:
                     print("Downloading Album Cover")
                     print(n_playback['item.album.images'][0][0]["url"])

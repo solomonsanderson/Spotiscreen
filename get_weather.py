@@ -41,4 +41,4 @@ def get_weather(location):
 if __name__ == "__main__":
     if len(sys.argv) <= 1:
         exit(f"1 args required, {len(sys.argv)-1} given")
-    get_weather(sys.argv[1])
+    get_weather(sys.argv)

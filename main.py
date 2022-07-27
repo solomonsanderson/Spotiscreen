@@ -58,7 +58,7 @@ while True:
 
 
             if ( dt > interval):
-                get_weather("B296BP")
+                get_weather("Austrailia")
                 call_time = datetime.now().time()
             
             # display_image("weather_icon.png")

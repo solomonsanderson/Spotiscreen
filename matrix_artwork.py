@@ -6,20 +6,19 @@ from PIL import ImageDraw
 import time 
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
+def main():
+    image = Image.open("album_art.png")
+    options = RGBMatrixOptions()
+    options.rows = 32
+    options.chain_length = 1
+    options.parallel = 1
+    options.hardware_mapping = "regular"
 
-image = Image.open("album_art.png")
+    matrix = RGBMatrix(options = options)
 
-options = RGBMatrixOptions()
-options.rows = 32
-options.chain_length = 1
-options.parallel = 1
-options.hardware_mapping = "regular"
+    image.thumbnail((matrix.width, matrix.height))
 
-matrix = RGBMatrix(options = options)
-
-image.thumbnail((matrix.width, matrix.height))
-
-matrix.SetImage(image.convert("RGB"))
+    matrix.SetImage(image.convert("RGB"))
 
 if __name__ == "__main__":
-    pass
+    main()

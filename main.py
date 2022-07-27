@@ -13,7 +13,7 @@ import credentials
 import time
 import sys
 import subprocess
-#import matrix_artwork
+import matrix_artwork
 
 scope = "user-read-playback-state"
 redirect = "http://localhost:7777/callback"
@@ -47,10 +47,11 @@ while True:
                 print("Downloading Album Cover")
                 print(n_playback['item.album.images'][0][0]["url"])
                 response = requests.get(album_art_url)
+                time.sleep(0.1) # might fix permission error
                 file = open("album_art.png", "wb")
                 file.write(response.content)
                 file.close()
-                #matrix_artwork()
+                matrix_artwork.main()
             prev_album_art_url = album_art_url
     # except:
     # print(f"An {sys.exc_info()} error occured")

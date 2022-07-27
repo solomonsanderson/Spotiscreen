@@ -51,8 +51,8 @@ while True:
                     print(n_playback['item.album.images'][0][0]["url"])
                     matrix_artwork()
                 prev_album_art_url = album_art_url
-    # except:
-        # print(f"An {sys.exc_info()} error occured")
+    except:
+        print(f"An {sys.exc_info()} error occured")
     
 
     time.sleep(1)

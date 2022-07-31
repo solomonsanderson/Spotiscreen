@@ -26,7 +26,7 @@ options.rows = 32
 options.chain_length = 1
 options.parallel = 1
 options.hardware_mapping = "regular"
-options.limit_refresh = 10
+options.limit_refresh_rate_hz = 10
 matrix = RGBMatrix(options = options)
 
 

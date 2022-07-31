@@ -9,10 +9,13 @@ import credentials
 import time
 from io import BytesIO
 <<<<<<< HEAD
+<<<<<<< HEAD
 import sys
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
 
+=======
+>>>>>>> parent of 7250fb9 (added rgb library import)
 =======
 >>>>>>> parent of 7250fb9 (added rgb library import)
 

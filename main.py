@@ -4,13 +4,13 @@ import pandas as pd
 import requests 
 from PIL import Image
 import spotipy
-import spotipy.util as util
-from spotipy.oauth2 import SpotifyClientCredentials
 from spotipy.oauth2 import SpotifyOAuth
-import spotipy.oauth2 as oauth2
 import credentials
 import time
 from io import BytesIO
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
+
+
 
 scope = "user-read-playback-state"
 redirect = "http://localhost:7777/callback"

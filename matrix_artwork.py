@@ -22,12 +22,12 @@ def main():
 
     matrix.SetImage(image.convert("RGB"))
 
-    try:
-        print("Press CTRL-C to stop.")
-        while True:
-            time.sleep(100)
-    except KeyboardInterrupt:
-        sys.exit(0)
-        pass
+    # try:
+    #     print("Press CTRL-C to stop.")
+    #     while True:
+    #         time.sleep(100)
+    # # except KeyboardInterrupt:
+    # #     sys.exit(0)
+    # #     pass
 if __name__ == "__main__":
     main()

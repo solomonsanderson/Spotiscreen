@@ -1,6 +1,5 @@
 ''''''
 
-import os
 import pandas as pd
 import requests 
 from PIL import Image
@@ -11,9 +10,7 @@ from spotipy.oauth2 import SpotifyOAuth
 import spotipy.oauth2 as oauth2
 import credentials
 import time
-import sys
-import subprocess
-import matrix_artwork
+from io import BytesIO
 
 scope = "user-read-playback-state"
 redirect = "http://localhost:7777/callback"
@@ -22,6 +19,15 @@ auth_manager = SpotifyOAuth(username= credentials.username, scope = scope,redire
 sp = spotipy.Spotify(auth_manager=auth_manager)
 
 prev_album_art_url = None
+
+# creating matrix object
+options = RGBMatrixOptions()
+options.rows = 32
+options.chain_length = 1
+options.parallel = 1
+options.hardware_mapping = "regular"
+matrix = RGBMatrix(options = options)
+
 
 while True:
     #try:
@@ -46,39 +52,13 @@ while True:
         elif playing == True:
             album_art_url = n_playback['item.album.images'][0][0]["url"]
             
-            while album_art_url != prev_album_art_url:
-                print("Downloading Album Cover")
-                print(n_playback['item.album.images'][0][0]["url"])
-                response = requests.get(album_art_url)
-                # time.sleep(0.1) # might fix permission error
-                file = open("album_art.png", "wb")
-                file.write(response.content)
-                file.close()
-                matrix_artwork.main()
-                prev_album_art_url = album_art_url
+            if prev_album_art_url != album_art_url:
                 
+                response = requests.get(album_art_url)
+                cover = Image.open(BytesIO(response.content))
+                cover.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
+                matrix.SetImage(cover.convert("RGB"))
+                prev_album_art_url = album_art_url
             
-
-            
-
-
-
-
-
-
-
-            # elif album_art_url != prev_album_art_url:
-            #     print("Downloading Album Cover")
-            #     print(n_playback['item.album.images'][0][0]["url"])
-            #     response = requests.get(album_art_url)
-            #     time.sleep(0.1) # might fix permission error
-            #     file = open("album_art.png", "wb")
-            #     file.write(response.content)
-            #     file.close()
-            #     matrix_artwork.main()
-            # prev_album_art_url = album_art_url
-    # except:
-    # print(f"An {sys.exc_info()} error occured")
-
 
     time.sleep(1)

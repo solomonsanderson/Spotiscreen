@@ -4,6 +4,7 @@
 from PIL import Image 
 from PIL import ImageDraw
 import time 
+import sys
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
 

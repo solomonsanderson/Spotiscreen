@@ -15,7 +15,7 @@ def main():
     options.parallel = 1
     options.hardware_mapping = "regular"
 # 
-    # matrix = RGBMatrix(options = options)
+    matrix = RGBMatrix(options = options)
 # 
     image.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
 

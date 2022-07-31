@@ -31,30 +31,48 @@ while True:
         sp = spotipy.Spotify(auth_manager=auth_manager)
         print("token refreshed")
     #    print(auth_manager.get_access_token(as_dict=False))
+    
     playback = sp.current_playback()
+    
     if playback == None:
         print("paused")
+
     else:
         n_playback = pd.json_normalize(playback)
         playing = n_playback['is_playing'][0]
         if playing == False:
             print("paused")
+
         elif playing == True:
             album_art_url = n_playback['item.album.images'][0][0]["url"]
-            if album_art_url == prev_album_art_url:
-                print("Playing, No Change")
-            elif album_art_url != prev_album_art_url:
+            
+            if album_art_url != prev_album_art_url:
                 print("Downloading Album Cover")
                 print(n_playback['item.album.images'][0][0]["url"])
-                response = requests.get(album_art_url)
-                time.sleep(0.1) # might fix permission error
-                file = open("album_art.png", "wb")
-                file.write(response.content)
-                file.close()
                 matrix_artwork.main()
-            prev_album_art_url = album_art_url
+                prev_album_art_url = album_art_url
+            
+
+            
+
+
+
+
+
+
+
+            # elif album_art_url != prev_album_art_url:
+            #     print("Downloading Album Cover")
+            #     print(n_playback['item.album.images'][0][0]["url"])
+            #     response = requests.get(album_art_url)
+            #     time.sleep(0.1) # might fix permission error
+            #     file = open("album_art.png", "wb")
+            #     file.write(response.content)
+            #     file.close()
+            #     matrix_artwork.main()
+            # prev_album_art_url = album_art_url
     # except:
     # print(f"An {sys.exc_info()} error occured")
-    
+
 
     time.sleep(1)

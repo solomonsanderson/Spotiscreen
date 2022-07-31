@@ -11,6 +11,9 @@ import spotipy.oauth2 as oauth2
 import credentials
 import time
 from io import BytesIO
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
+
+
 
 scope = "user-read-playback-state"
 redirect = "http://localhost:7777/callback"

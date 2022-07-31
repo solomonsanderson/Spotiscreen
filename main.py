@@ -46,7 +46,7 @@ while True:
         elif playing == True:
             album_art_url = n_playback['item.album.images'][0][0]["url"]
             
-            if album_art_url != prev_album_art_url:
+            while album_art_url != prev_album_art_url:
                 print("Downloading Album Cover")
                 print(n_playback['item.album.images'][0][0]["url"])
                 response = requests.get(album_art_url)

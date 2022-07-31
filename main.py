@@ -49,6 +49,11 @@ while True:
             if album_art_url != prev_album_art_url:
                 print("Downloading Album Cover")
                 print(n_playback['item.album.images'][0][0]["url"])
+                response = requests.get(album_art_url)
+                # time.sleep(0.1) # might fix permission error
+                file = open("album_art.png", "wb")
+                file.write(response.content)
+                file.close()
                 matrix_artwork.main()
                 prev_album_art_url = album_art_url
             

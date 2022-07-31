@@ -26,7 +26,7 @@ def main():
         while True:
             time.sleep(100)
     except KeyboardInterrupt:
-        #sys.exit(0)
+        sys.exit(0)
         pass
 if __name__ == "__main__":
     main()

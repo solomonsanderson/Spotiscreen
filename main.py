@@ -56,8 +56,7 @@ while True:
                 file.close()
                 matrix_artwork.main()
                 prev_album_art_url = album_art_url
-                while True:
-                    time.sleep(0.05)
+                
             
 
             

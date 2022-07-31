@@ -8,6 +8,7 @@ from spotipy.oauth2 import SpotifyOAuth
 import credentials
 import time
 from io import BytesIO
+import sys
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
 

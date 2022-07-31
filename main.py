@@ -8,10 +8,13 @@ from spotipy.oauth2 import SpotifyOAuth
 import credentials
 import time
 from io import BytesIO
+<<<<<<< HEAD
 import sys
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
 
+=======
+>>>>>>> parent of 7250fb9 (added rgb library import)
 
 scope = "user-read-playback-state"
 redirect = "http://localhost:7777/callback"

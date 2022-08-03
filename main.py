@@ -64,9 +64,9 @@ while True:
             weather = get_weather("B296BP")
             weather_icon_url = weather["current.condition.icon"][0]
             response = requests.get("http:" + weather_icon_url)
-            weather = Image.open(BytesIO(response.content))
-            cover.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
-            matrix.SetImage(cover.convert("RGB"))
+            weather_icon = Image.open(BytesIO(response.content))
+            weather_icon.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
+            matrix.SetImage(weather_icon.convert("RGB"))
 
         elif playing == True:
             print("Playing")

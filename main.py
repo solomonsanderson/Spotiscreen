@@ -9,7 +9,7 @@ import credentials
 import time
 from io import BytesIO
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
-
+import sys
 
 
 scope = "user-read-playback-state"
@@ -32,35 +32,37 @@ matrix = RGBMatrix(options = options)
 
 
 while True:
-    #try:
-    token_info = auth_manager.get_cached_token()
-    if auth_manager.is_token_expired(token_info) == True:
-        auth_manager = SpotifyOAuth(username= credentials.username, scope = scope,redirect_uri=redirect_uri, client_id = credentials.client_id, client_secret= credentials.client_secret)
-        sp = spotipy.Spotify(auth_manager=auth_manager)
-        print("token refreshed")
-    #    print(auth_manager.get_access_token(as_dict=False))
-    
-    playback = sp.current_playback()
-    
-    if playback == None:
-        print("paused")
+    try:
+        token_info = auth_manager.get_cached_token()
+        if auth_manager.is_token_expired(token_info) == True:
+            auth_manager = SpotifyOAuth(username= credentials.username, scope = scope,redirect_uri=redirect_uri, client_id = credentials.client_id, client_secret= credentials.client_secret)
+            sp = spotipy.Spotify(auth_manager=auth_manager)
+            print("token refreshed")
+        #    print(auth_manager.get_access_token(as_dict=False))
 
-    else:
-        n_playback = pd.json_normalize(playback)
-        playing = n_playback['is_playing'][0]
-        if playing == False:
+        playback = sp.current_playback()
+
+        if playback == None:
             print("paused")
 
-        elif playing == True:
-            album_art_url = n_playback['item.album.images'][0][0]["url"]
-            
-            if prev_album_art_url != album_art_url:
-                
-                response = requests.get(album_art_url)
-                cover = Image.open(BytesIO(response.content))
-                cover.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
-                matrix.SetImage(cover.convert("RGB"))
-                prev_album_art_url = album_art_url
-            
+        else:
+            n_playback = pd.json_normalize(playback)
+            playing = n_playback['is_playing'][0]
+            if playing == False:
+                print("paused")
+
+            elif playing == True:
+                album_art_url = n_playback['item.album.images'][0][0]["url"]
+
+                if prev_album_art_url != album_art_url:
+
+                    response = requests.get(album_art_url)
+                    cover = Image.open(BytesIO(response.content))
+                    cover.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
+                    matrix.SetImage(cover.convert("RGB"))
+                    prev_album_art_url = album_art_url
+    except:
+        print(f"An {sys.exc_info()} error occured")
+
 
     time.sleep(1)

@@ -8,7 +8,7 @@ from spotipy.oauth2 import SpotifyOAuth
 import credentials
 import time
 from io import BytesIO
-# from rgbmatrix import RGBMatrix, RGBMatrixOptions
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
 import sys
 import subprocess
 from get_weather import get_weather
@@ -21,15 +21,15 @@ sp = spotipy.Spotify(auth_manager=auth_manager)
 
 prev_album_art_url = None
 
-# # creating matrix object
-# options = RGBMatrixOptions()
-# options.rows = 32
-# options.chain_length = 1
-# options.parallel = 1
-# options.hardware_mapping = "regular"
-# options.limit_refresh_rate_hz = 100
-# options.brightness=100
-# matrix = RGBMatrix(options = options)
+# creating matrix object
+options = RGBMatrixOptions()
+options.rows = 32
+options.chain_length = 1
+options.parallel = 1
+options.hardware_mapping = "regular"
+options.limit_refresh_rate_hz = 100
+options.brightness=100
+matrix = RGBMatrix(options = options)
 
 
 call_datetime = (datetime.now() - timedelta(hours=2))
@@ -65,8 +65,8 @@ while True:
             weather_icon_url = weather["current.condition.icon"][0]
             response = requests.get("http:" + weather_icon_url)
             weather = Image.open(BytesIO(response.content))
-            # cover.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
-            # matrix.SetImage(cover.convert("RGB"))
+            cover.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
+            matrix.SetImage(cover.convert("RGB"))
 
         elif playing == True:
             print("Playing")
@@ -75,8 +75,8 @@ while True:
             if prev_album_art_url != album_art_url:
                 response = requests.get(album_art_url)
                 cover = Image.open(BytesIO(response.content))
-                # cover.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
-                # matrix.SetImage(cover.convert("RGB"))
+                cover.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
+                matrix.SetImage(cover.convert("RGB"))
                 prev_album_art_url = album_art_url
     # except:
     #     print(f"An {sys.exc_info()} error occured")

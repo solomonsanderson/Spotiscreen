@@ -54,12 +54,6 @@ while True:
         playing = n_playback['is_playing'][0]
         if playing == False:
             print("paused")
-            # now = datetime.now().time()
-            # dt = datetime.combine(date.today(), now) - datetime.combine(date.today(), call_time)
-            # interval = timedelta(seconds = 20)
-            # if ( dt > interval):
-            #     get_weather("B296BP")
-            #     call_time = datetime.now().time()
             t=0
             weather_delay = 0
             while t <= weather_delay:
@@ -67,7 +61,12 @@ while True:
                 t = t++1
                 time.sleep(1)
             
-            get_weather("B296BP")
+            weather = get_weather("B296BP")
+            weather_icon_url = weather["current.condition.icon"][0]
+            response = requests.get("http:" + weather_icon_url)
+            weather = Image.open(BytesIO(response.content))
+            # cover.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
+            # matrix.SetImage(cover.convert("RGB"))
 
         elif playing == True:
             print("Playing")

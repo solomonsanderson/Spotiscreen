@@ -24,19 +24,20 @@ def get_weather(location):
     print(response.json())
 
     norm_response = pd.json_normalize(response.json())
-    # print(norm_response)
-    current_temp = norm_response["current.temp_c"]
-    current_condition = norm_response["current.condition.text"]
-    # print(current_temp)
-    # print(norm_response["current.condition.icon"])
+    # # print(norm_response)
+    # current_temp = norm_response["current.temp_c"]
+    # current_condition = norm_response["current.condition.text"]
+    # # # print(current_temp)
+    # # # print(norm_response["current.condition.icon"])
 
-    icon_url = (norm_response["current.condition.icon"][0])
-    # print(icon)
-    # print(icon_url)
-    icon = requests.get("http:" + icon_url)
-    file = open("weather_icon.png", "wb")
-    file.write(icon.content)
-    file.close()
+    # # icon_url = (norm_response["current.condition.icon"][0])
+    # # # print(icon)
+    # # # print(icon_url)
+    # # icon = requests.get("http:" + icon_url)
+    # # file = open("weather_icon.png", "wb")
+    # # file.write(icon.content)
+    # # file.close()
+    return norm_response
 
 if __name__ == "__main__":
     if len(sys.argv) <= 1:

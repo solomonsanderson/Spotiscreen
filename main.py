@@ -10,7 +10,9 @@ import time
 from io import BytesIO
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 import sys
-
+import subprocess
+from get_weather import get_weather
+from datetime import datetime, timedelta, date
 
 scope = "user-read-playback-state"
 redirect = "http://localhost:7777/callback"
@@ -29,6 +31,11 @@ options.hardware_mapping = "regular"
 options.limit_refresh_rate_hz = 100
 options.brightness=100
 matrix = RGBMatrix(options = options)
+
+
+call_datetime = (datetime.now() - timedelta(hours=2))
+call_time = call_datetime.time()
+# print(call_time)
 
 
 while True:
@@ -50,6 +57,14 @@ while True:
             playing = n_playback['is_playing'][0]
             if playing == False:
                 print("paused")
+                now = datetime.now().time()
+                dt = datetime.combine(date.today(), now) - datetime.combine(date.today(), call_time)
+                interval = timedelta(seconds = 20)
+
+                if ( dt > interval):
+                    get_weather("B296BP")
+                    call_time = datetime.now().time()
+
 
             elif playing == True:
                 album_art_url = n_playback['item.album.images'][0][0]["url"]
@@ -61,8 +76,40 @@ while True:
                     cover.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
                     matrix.SetImage(cover.convert("RGB"))
                     prev_album_art_url = album_art_url
+    # except:
+    #     print(f"An {sys.exc_info()} error occured")
+
+
+        # elif playback != False:
+        #     n_playback = pd.json_normalize(playback) 
+        #     playing = n_playback['is_playing'][0]
+
+
+        if playing == False:
+            print("paused")
+            now = datetime.now().time()
+            dt = datetime.combine(date.today(), now) - datetime.combine(date.today(), call_time)
+            interval = timedelta(seconds = 20)
+
+
+            if ( dt > interval):
+                get_weather("Austrailia")
+                call_time = datetime.now().time()
+            
+            # display_image("weather_icon.png")
+
+
+        # elif playing == True:
+        #     album_art_url = n_playback['item.album.images'][0][0]["url"]
+        #     if album_art_url == prev_album_art_url:
+        #         print("Playing, No Change")
+        #     elif album_art_url != prev_album_art_url:
+        #         print("Downloading Album Cover")
+        #         print(n_playback['item.album.images'][0][0]["url"])
+        #         # display_image("album_art.png")
+        #     prev_album_art_url = album_art_url
     except:
         print(f"An {sys.exc_info()} error occured")
-
+    
 
     time.sleep(1)

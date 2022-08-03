@@ -63,6 +63,7 @@ while True:
             
             weather = get_weather("B296BP")
             weather_icon_url = weather["current.condition.icon"][0]
+            weather_icon_url = weather_icon_url.replace("64x64","128x128")
             response = requests.get("http:" + weather_icon_url)
             weather_icon = Image.open(BytesIO(response.content))
             weather_icon.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)

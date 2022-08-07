@@ -45,6 +45,7 @@ while True:
             print(playing)
             album_art_url = n_playback['item.album.images'][0][0]["url"]
             if prev_album_art_url != album_art_url:
+                print("Updating Image")
                 response = requests.get(album_art_url)
                 cover = Image.open(BytesIO(response.content))
                 cover.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
@@ -56,4 +57,4 @@ while True:
         pass
     
 
-    time.sleep(1)
+    time.sleep(0.5)

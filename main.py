@@ -46,9 +46,9 @@ while True:
 
         token_info = auth_manager.get_cached_token()
         token_expiration_status = auth_manager.is_token_expired(token_info)
-
         playback = sp.current_playback()
-        if playback == "None":
+        
+        if playback == None:
             print("Paused")
 
         else:

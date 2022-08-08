@@ -9,12 +9,10 @@ import credentials
 import time
 from io import BytesIO
 import platform
-import sys
-import subprocess
 from get_weather import get_weather
-from datetime import datetime, timedelta, date
 
-# print(platform.platform())
+
+
 if platform.platform() != "Windows-10-10.0.19044-SP0":
     from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
@@ -22,7 +20,8 @@ if platform.platform() != "Windows-10-10.0.19044-SP0":
 scope = "user-read-playback-state"
 redirect_uri = "http://localhost:8888/callback/"
 
-prev_album_art_url = None
+
+
 if platform.platform() != "Windows-10-10.0.19044-SP0":
     # creating matrix object
     options = RGBMatrixOptions()
@@ -34,12 +33,14 @@ if platform.platform() != "Windows-10-10.0.19044-SP0":
     options.brightness=100
     matrix = RGBMatrix(options = options)
 
+prev_album_art_url = None
 token_expiration_status = True
 
 
 while True:
     try:
         if token_expiration_status == True:
+            print("Updating Token!")
             auth_manager = SpotifyOAuth(client_id=credentials.client_id, client_secret=credentials.client_secret, redirect_uri=redirect_uri, scope=scope)
             sp = spotipy.Spotify(auth_manager=auth_manager)
 

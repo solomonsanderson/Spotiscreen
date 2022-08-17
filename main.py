@@ -36,6 +36,7 @@ if platform.platform() != "Windows-10-10.0.19044-SP0":
 prev_album_art_url = None
 token_expiration_status = True
 
+pause_timer = 0
 
 while True:
     try:
@@ -50,6 +51,9 @@ while True:
         
         if playback == None:
             print("Paused")
+            # if pause_timer > 20:
+            #     pass
+            # pause_timer += 1
 
         else:
             n_playback = pd.json_normalize(playback)

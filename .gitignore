@@ -1,6 +1,8 @@
 album_art.png
 credentials.py
 .pyc
+.cache
 weather_icon.png
 Backbox.ipt
 OldVersions/
+CAD/

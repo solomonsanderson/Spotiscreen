@@ -10,6 +10,7 @@ import time
 from io import BytesIO
 import platform
 from get_weather import get_weather
+from datetime import datetime
 
 
 
@@ -36,6 +37,15 @@ if platform.platform() != "Windows-10-10.0.19044-SP0":
 prev_album_art_url = None
 token_expiration_status = True
 
+# Timing
+now = datetime.now().time()
+off_time = datetime.strptime("12:00 AM", "%I:%M %p").time()
+on_time = datetime.strptime("9:00 AM", "%I:%M %p").time()
+print(off_time, on_time)
+
+
+if off_time <= now < on_time:
+    print("off")
 
 while True:
     try:

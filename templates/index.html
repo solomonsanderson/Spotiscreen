@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spotiscreen Control Panel</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="static\styles\styles.css">
+</head>
+<body class="body">
+    <div class="container">
+        <div class="onoff">onoff toggle
+            <div>
+                <input type="checkbox" id="scales" name="scales"
+                checked>
+            </div>
+        </div>
+        <div class="brightness">brightness control
+            <div class="slidecontainer">
+                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+            </div>
+        </div>
+        <div class="display">display settings
+            <div>
+                <select name="information" id="info">
+                    <option value="weather">Weather</option>
+                    <option value="image">Image</option>
+                    <option value="image">Time</option>
+                </select>
+            </div>
+        </div>
+        <div class="random">
+            <img src="{{url_for('static', filename='spotiscreen.png')}}" align="middle" width=100%/>
+        </div>
+    </div>
+</body>
+</html>

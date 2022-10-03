@@ -4,26 +4,28 @@
     <title>Spotiscreen Control Panel</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="static\styles\styles.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text.javascript" src="{{ url_for('static', filename='static\JS\interface.js')}}" ></script>
 </head>
 <body class="body">
-    <div class="container">
+    <div class="container" id="container">
         <div class="onoff">onoff toggle
             <div>
-                <input type="checkbox" id="scales" name="scales"
+                <input type="checkbox" id="onoff" name="scales" class ="checkbox" value = "on"
                 checked>
             </div>
         </div>
         <div class="brightness">brightness control
-            <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+            <div id="slider" class="slider">
+                <input type="range" min="1" max="100" value="50" class="slider" id="brightslide">
             </div>
         </div>
         <div class="display">display settings
             <div>
-                <select name="information" id="info">
+                <select name="information" id="setting" class="setting">
                     <option value="weather">Weather</option>
                     <option value="image">Image</option>
-                    <option value="image">Time</option>
+                    <option value="time">Time</option>
                 </select>
             </div>
         </div>
@@ -31,5 +33,16 @@
             <img src="{{url_for('static', filename='spotiscreen.png')}}" align="middle" width=100%/>
         </div>
     </div>
+    <script type="text/javascript">
+        addEventListener("change", function(){
+            var brightnessSlider = document.getElementById("brightslide").value;
+            var onoff = document.getElementById("onoff").checked;
+            var setting = document.getElementById("setting").value;
+            console.log(brightnessSlider);
+            console.log(onoff);
+            console.log(setting);
+
+        });
+    </script>
 </body>
 </html>

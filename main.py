@@ -52,6 +52,7 @@ token_info = auth_manager.get_cached_token()
 
 
 while True:
+    try:
         # print(token_expiration_status)
         # print(f"INFO{token_info} ")
         if token_expiration_status == True or token_info == None:
@@ -81,9 +82,9 @@ while True:
                     matrix.SetImage(cover.convert("RGB"))
                 prev_album_art_url = album_art_url
 
-    # except Exception as e:
-    #     print(e)
-    #     pass
+    except Exception as e:
+        print(e)
+        pass
     
 
-        time.sleep(0.5)
+    time.sleep(0.5)

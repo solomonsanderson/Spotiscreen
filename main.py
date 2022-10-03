@@ -47,15 +47,21 @@ print(off_time, on_time)
 if off_time <= now < on_time:
     print("off")
 
+auth_manager = SpotifyOAuth(client_id=credentials.client_id, client_secret=credentials.client_secret, redirect_uri=redirect_uri, scope=scope)
+token_info = auth_manager.get_cached_token()
+
+
 while True:
-    try:
-        if token_expiration_status == True:
+        # print(token_expiration_status)
+        # print(f"INFO{token_info} ")
+        if token_expiration_status == True or token_info == None:
             print("Updating Token!")
             auth_manager = SpotifyOAuth(client_id=credentials.client_id, client_secret=credentials.client_secret, redirect_uri=redirect_uri, scope=scope)
             sp = spotipy.Spotify(auth_manager=auth_manager)
 
-        token_info = auth_manager.get_cached_token()
-        token_expiration_status = auth_manager.is_token_expired(token_info)
+        
+        if token_info != None:
+            token_expiration_status = auth_manager.is_token_expired(token_info)
         playback = sp.current_playback()
         
         if playback == None:
@@ -75,9 +81,9 @@ while True:
                     matrix.SetImage(cover.convert("RGB"))
                 prev_album_art_url = album_art_url
 
-    except Exception as e:
-        print(e)
-        pass
+    # except Exception as e:
+    #     print(e)
+    #     pass
     
 
-    time.sleep(0.5)
+        time.sleep(0.5)

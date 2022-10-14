@@ -1,19 +1,11 @@
-from urllib import request
-from flask import Flask, render_template, Response
+# from urllib3 import request
+# import urllib3
+from flask import Flask, render_template, Response, request
 
 
 app = Flask(__name__)
 app.config['TESTING'] = True
 
-
-
-@app.route("/background_process/")
-def background_process():
-    try:
-        info = request.get("brightslide", 0, type=str)
-        print(info)
-    except Exception as e:
-        return str(e)
 
 
 @app.route("/", methods = ["POST","GET"])
@@ -22,6 +14,11 @@ def client():
     # state = request.form.get
     return render_template("index.html")
 
+@app.route("/onoff/", methods=["POST", "GET"])
+def handle_onoff():
+    onoff = request.args("onoffbox")
+    print(onoff)
+    return render_template("index.html", onoff=onoff)
 
 if __name__ == "__main__":
     app.run()

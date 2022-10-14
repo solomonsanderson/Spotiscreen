@@ -3,6 +3,7 @@
 <head>
     <title>Spotiscreen Control Panel</title>
     <meta charset="UTF-8">
+    <meta author="Solomon Sanderson">
     <link rel="stylesheet" href="static\styles\styles.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text.javascript" src="{{ url_for('static', filename='static\JS\interface.js')}}" ></script>
@@ -10,23 +11,27 @@
 <body class="body">
     <div class="container" id="container">
         <div class="onoff">onoff toggle
-            <div>
-                <input type="checkbox" id="onoff" name="scales" class ="checkbox" value = "on"
+            <form action="/onoff" method="POST">
+                <input type="checkbox" id="onoff" name="onoffbox" class ="checkbox" value = "on"
                 checked>
-            </div>
+            </form>
         </div>
         <div class="brightness">brightness control
             <div id="slider" class="slider">
-                <input type="range" min="1" max="100" value="50" class="slider" id="brightslide">
+                <form action="/brightness" method="POST">
+                    <input type="range" min="1" max="100" value="50" class="slider" id="brightslide">
+                </form>
             </div>
         </div>
         <div class="display">display settings
             <div>
-                <select name="information" id="setting" class="setting">
-                    <option value="weather">Weather</option>
-                    <option value="image">Image</option>
-                    <option value="time">Time</option>
-                </select>
+                <form action="/display" method="POST">
+                    <select name="information" id="setting" class="setting">
+                        <option value="weather">Weather</option>
+                        <option value="image">Image</option>
+                        <option value="time">Time</option>
+                    </select>
+                </form>
             </div>
         </div>
         <div class="random">
@@ -41,7 +46,9 @@
             console.log(brightnessSlider);
             console.log(onoff);
             console.log(setting);
-
+            brightnessSlider.onchange();
+            onoff.onchange();
+            setting.onchange();
         });
     </script>
 </body>

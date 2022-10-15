@@ -52,6 +52,7 @@ token_info = auth_manager.get_cached_token()
 
 
 while True:
+    now = datetime.now().time()
     try:
         # print(token_expiration_status)
         # print(f"INFO{token_info} ")

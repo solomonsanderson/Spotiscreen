@@ -53,9 +53,13 @@ token_info = auth_manager.get_cached_token()
 
 while True:
     now = datetime.now().time()
+    print(now)
     try:
         # print(token_expiration_status)
         # print(f"INFO{token_info} ")
+        if off_time <= now < on_time == False:
+            print("Sleep!")
+            
         if token_expiration_status == True or token_info == None:
             print("Updating Token!")
             auth_manager = SpotifyOAuth(client_id=credentials.client_id, client_secret=credentials.client_secret, redirect_uri=redirect_uri, scope=scope)
@@ -69,6 +73,8 @@ while True:
         if playback == None:
             print("Paused")
 
+
+
         else:
             n_playback = pd.json_normalize(playback)
             playing = n_playback['is_playing'][0]
@@ -77,13 +83,7 @@ while True:
             if prev_album_art_url != album_art_url:
                 print("Updating Image")
                 response = requests.get(album_art_url)
-                if off_time <= now < on_time:
-                    cover = Image.open()
-                    print("outside time")
-                else:
-                    cover = Image.open(BytesIO(response.content))
-                    print("inside time")
-
+                cover = Image.open(BytesIO(response.content))
                 if platform.platform() != "Windows-10-10.0.19044-SP0":
                     cover.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
                     matrix.SetImage(cover.convert("RGB"))

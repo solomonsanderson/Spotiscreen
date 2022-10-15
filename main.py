@@ -86,10 +86,12 @@ while True:
                 cover = Image.open(BytesIO(response.content))
                 if platform.platform() != "Windows-10-10.0.19044-SP0":
                     if off_time <= now < on_time:
+                        matrix.SetImage(None)
+                    else:
                         cover.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
                         matrix.SetImage(cover.convert("RGB"))
-                    else:
-                        matrix.SetImage(None)
+                    
+                        
                 prev_album_art_url = album_art_url
 
     except Exception as e:

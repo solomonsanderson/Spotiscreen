@@ -76,7 +76,13 @@ while True:
             if prev_album_art_url != album_art_url:
                 print("Updating Image")
                 response = requests.get(album_art_url)
-                cover = Image.open(BytesIO(response.content))
+                if off_time <= now < on_time:
+                    cover = Image.open()
+                    print("outside time")
+                else:
+                    cover = Image.open(BytesIO(response.content))
+                    print("inside time")
+
                 if platform.platform() != "Windows-10-10.0.19044-SP0":
                     cover.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
                     matrix.SetImage(cover.convert("RGB"))

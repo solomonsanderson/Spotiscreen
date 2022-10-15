@@ -57,9 +57,9 @@ while True:
     try:
         # print(token_expiration_status)
         # print(f"INFO{token_info} ")
-        if off_time <= now < on_time == False:
+        if off_time <= now < on_time:
             print("Sleep!")
-            
+
         if token_expiration_status == True or token_info == None:
             print("Updating Token!")
             auth_manager = SpotifyOAuth(client_id=credentials.client_id, client_secret=credentials.client_secret, redirect_uri=redirect_uri, scope=scope)
@@ -85,8 +85,11 @@ while True:
                 response = requests.get(album_art_url)
                 cover = Image.open(BytesIO(response.content))
                 if platform.platform() != "Windows-10-10.0.19044-SP0":
-                    cover.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
-                    matrix.SetImage(cover.convert("RGB"))
+                    if off_time <= now < on_time:
+                        cover.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
+                        matrix.SetImage(cover.convert("RGB"))
+                    else:
+                        matrix.SetImage(None)
                 prev_album_art_url = album_art_url
 
     except Exception as e:

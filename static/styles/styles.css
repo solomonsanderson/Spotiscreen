@@ -11,18 +11,15 @@
   }
 
 .body {
-    background-color:#ff99ee;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    background-color:hsla(210,100%,50%,1);
     background-image:
-    radial-gradient(at 11% 70%, hsla(148,85%,67%,1) 0px, transparent 50%),
-    radial-gradient(at 86% 36%, hsla(263,67%,74%,1) 0px, transparent 50%),
-    radial-gradient(at 51% 85%, hsla(115,85%,61%,1) 0px, transparent 50%),
-    radial-gradient(at 5% 4%, hsla(191,83%,73%,1) 0px, transparent 50%),
-    radial-gradient(at 44% 10%, hsla(290,64%,62%,1) 0px, transparent 50%),
-    radial-gradient(at 64% 45%, hsla(297,74%,67%,1) 0px, transparent 50%),
-    radial-gradient(at 1% 37%, hsla(75,66%,70%,1) 0px, transparent 50%);
+    radial-gradient(at 40% 20%, hsla(222,100%,28%,1) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, hsla(189,100%,56%,1) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsla(229,100%,23%,1) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, hsla(183,100%,76%,1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(212,100%,77%,1) 0px, transparent 50%),
+    radial-gradient(at 80% 100%, hsla(237,53%,61%,1) 0px, transparent 50%),
+    radial-gradient(at 0% 0%, hsla(180,100%,76%,1) 0px, transparent 50%);
   }
   
 .onoff { grid-area: onoff;

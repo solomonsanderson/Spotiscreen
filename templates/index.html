@@ -42,6 +42,16 @@
                 <input type="submit" value="submit" id="submit" />
               </form>
             </div>
+            Choose Image:
+            <div id="select">
+                <form>
+                  <select name="file_select" id = "file_select" action="/" method = "POST">
+                    {% for o in data %}
+                    <option value = "{{ o.name }}">{{ o.name }}</option>
+                    {% endfor %}
+                  </select>
+                </form>
+            </div>
             <br>
             <div>
                 The length of time after music has stopped playing before idling (Seconds)

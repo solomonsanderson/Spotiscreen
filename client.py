@@ -8,6 +8,7 @@ from multiprocessing import Process, Value
 import main
 from main import matrix
 import time
+import os
 
 app = Flask(__name__)
 app.config['TESTING'] = True
@@ -32,8 +33,12 @@ def client():
     # if request.method == "POST":
     # state = request.form.get
     screen_size, onoff, brightness, idle_display = get_config()
+    dirs = []
+    for dir in os.listdir("idle_images"):
+        dirs.append({'name': dir})
+
     # print(onoff, brightness, idle_display)
-    return render_template("index.html", onoff=onoff, brightness=int(brightness), idle_display=idle_display)
+    return render_template("index.html", onoff=onoff, brightness=int(brightness), idle_display=idle_display, data = dirs)
 
 
 @app.route("/onoff/", methods=["POST", "GET"])
@@ -52,7 +57,13 @@ def handle_onoff():
             config.write(configfile)
 
     screen_size, onoff, brightness, idle_display = get_config()
+
     return render_template("index.html", onoff=onoff, brightness=int(brightness), idle_display=idle_display)
+
+
+# @app.route("/", methods = ["POST", "GET"])
+# def 
+
 
 @app.route("/success", methods=["POST"])
 def success():
@@ -60,8 +71,12 @@ def success():
         f = request.files["fileupload"]
         f.save("idle_images/" + f.filename)
 
+    dirs = []
+    for dir in os.listdir("idle_images"):
+        dirs.append({'name': dir})
+
     screen_size, onoff, brightness, idle_display = get_config()
-    return render_template("index.html", onoff=onoff, brightness=int(brightness), idle_display=idle_display)
+    return render_template("index.html", onoff=onoff, brightness=int(brightness), idle_display=idle_display, data = dirs)
         
 
 # @app.route("/brightness/", methods=["POST", "GET"])

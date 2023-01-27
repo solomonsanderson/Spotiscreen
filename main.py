@@ -155,11 +155,13 @@ class matrix:
                 self.pause_time = datetime.datetime.now()
             
             diff = current_t - self.pause_time
-            if diff > datetime.timedelta(minutes=1):
+            if diff > datetime.timedelta(minutes=0, seconds = 1):
                 print("Show weather")
-                get_weather("england")
+                if diff.seconds % 30 == 0:
+                    print("Update Weather")
+                    weather_json = get_weather("england")
+                
 
-            print(diff)
         else:
             print("playing")
             self.pause_time = None

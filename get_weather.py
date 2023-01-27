@@ -21,7 +21,7 @@ def get_weather(location):
         response = requests.get("http://api.weatherapi.com/v1/current.json?key=e3052fb6b4594c309bb234000220207&q=" + str(location))
 
     # print(response.status_code)
-    print(response.json())
+    # print(response.json())
 
     norm_response = pd.json_normalize(response.json())
     # # print(norm_response)
@@ -37,6 +37,9 @@ def get_weather(location):
     # # file = open("weather_icon.png", "wb")
     # # file.write(icon.content)
     # # file.close()
+    # print(response.json())
+    # print(norm_response.columns)
+    print(norm_response["current.condition.icon"])
     return norm_response
 
 if __name__ == "__main__":

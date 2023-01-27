@@ -135,7 +135,7 @@ class matrix:
     def update(self):
         ''''''
         # try:
-        print(self.token_status)
+        # print(self.token_status)
         if self.token_status == True:
             print("Updating Token!")
             self.auth_manager = SpotifyOAuth(client_id=credentials.client_id, client_secret=credentials.client_secret, redirect_uri=redirect_uri, scope=scope)
@@ -148,6 +148,7 @@ class matrix:
         status = self.play_status(playback)
         
         if status == False:
+            icon_url = None
             print("Paused")
             current_t = datetime.datetime.now()
          
@@ -157,11 +158,22 @@ class matrix:
             diff = current_t - self.pause_time
             if diff > datetime.timedelta(minutes=0, seconds = 1):
                 print("Show weather")
-                if diff.seconds % 30 == 0:
+                if diff.seconds == 1:
                     print("Update Weather")
-                    weather_json = get_weather("england")
-                
+                    icon_url = get_weather("auto")
 
+                elif diff.seconds % 30 == 0:
+                    print("Update Weather")
+                    icon_url = get_weather("auto")
+                
+                if icon_url != None:
+                    print("display weather")
+                    response = requests.get(icon_url)
+                    cover = Image.open(BytesIO(response.content))
+                    if platform.platform() != "Windows-10-10.0.19044-SP0":
+                        cover.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
+                        matrix.SetImage(cover.convert("RGB"))
+        
         else:
             print("playing")
             self.pause_time = None

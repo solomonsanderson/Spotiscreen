@@ -4,6 +4,9 @@ from flask import Flask, render_template, Response, request, jsonify
 import configparser
 import pandas as pd
 
+from multiprocessing import Process, Value
+import main
+
 app = Flask(__name__)
 app.config['TESTING'] = True
 
@@ -22,7 +25,7 @@ def get_config():
     return (screen_height, screen_width), onoff, brightness, idle_display
 
 
-@app.route("/", methods = ["POST","GET"])
+@app.route("/", methods = ["POST","GET"])   
 def client():
     # if request.method == "POST":
     # state = request.form.get
@@ -72,4 +75,9 @@ def handle_onoff():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # recording_on = 
+    p = Process(target = main)
+    p.start()
+    app.run(debug=True, use_reloader = False)
+    p.join()
+    

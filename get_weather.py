@@ -3,7 +3,7 @@
 
 import requests
 import pandas as pd
-# import geocoder
+import geocoder
 import sys
 
 

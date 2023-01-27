@@ -6,6 +6,8 @@ import pandas as pd
 
 from multiprocessing import Process, Value
 import main
+from main import matrix
+import time
 
 app = Flask(__name__)
 app.config['TESTING'] = True
@@ -72,11 +74,15 @@ def handle_onoff():
 #     return render_template("index.html", onoff=onoff, brightness=brightness, idle_display=idle_display)
 
 
-
+def matrix_loop():
+    mat = matrix()
+    while True:
+        mat.update()
+        time.sleep(0.5)
 
 if __name__ == "__main__":
     # recording_on = 
-    p = Process(target = main)
+    p = Process(target = matrix_loop)
     p.start()
     app.run(debug=True, use_reloader = False)
     p.join()

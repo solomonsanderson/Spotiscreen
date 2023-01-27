@@ -3,7 +3,7 @@
 from flask import Flask, render_template, Response, request, jsonify
 import configparser
 import pandas as pd
-
+from fileinput import filename
 from multiprocessing import Process, Value
 import main
 from main import matrix
@@ -54,6 +54,15 @@ def handle_onoff():
     screen_size, onoff, brightness, idle_display = get_config()
     return render_template("index.html", onoff=onoff, brightness=int(brightness), idle_display=idle_display)
 
+@app.route("/success", methods=["POST"])
+def success():
+    if request.method == "POST":
+        f = request.files["fileupload"]
+        f.save("idle_images/" + f.filename)
+
+    screen_size, onoff, brightness, idle_display = get_config()
+    return render_template("index.html", onoff=onoff, brightness=int(brightness), idle_display=idle_display)
+        
 
 # @app.route("/brightness/", methods=["POST", "GET"])
 # def handle_brightness():
@@ -78,6 +87,7 @@ def matrix_loop():
     mat = matrix()
     while True:
         mat.update()
+        mat.update_brightness()
         time.sleep(0.5)
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title>Spotiscreen Control Panel</title>
@@ -34,6 +34,13 @@
                         <option value="time">Time</option>
                     </select>
                 </form>
+            </div>
+            <div id = "file_upload">
+              Upload an image:
+              <form action = "/success" method = "post" id = "file_upload" enctype="multipart/form-data">
+                <input id="fileupload" name="fileupload" type = "file" accept="image/*" />
+                <input type="submit" value="submit" id="submit" />
+              </form>
             </div>
             <br>
             <div>

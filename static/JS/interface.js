@@ -24,3 +24,4 @@ function get_settings() {
     });
 
 }
+

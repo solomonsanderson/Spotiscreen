@@ -79,6 +79,11 @@ def success():
     return render_template("index.html", onoff=onoff, brightness=int(brightness), idle_display=idle_display, data = dirs)
         
 
+@app.route("/selected/", methods = ["POST"])
+def select_image():
+    if request.method == "POST":
+        data = request.get_json()
+        print(data)
 # @app.route("/brightness/", methods=["POST", "GET"])
 # def handle_brightness():
 #     if request.method == "POST":

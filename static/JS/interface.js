@@ -19,9 +19,25 @@ function get_settings() {
         url: "/onoff/",
         data: JSON.stringify(settings_arr),
         contentType: "application/json",
-        dataType:"json",
-    
+        dataType:"json"
     });
 
 }
+
+// function get_idle_image(){
+//     console.log("get_ii");
+//     var sel_image = document.getElementById("file_select").value;
+
+//     var image_arr = [
+//         {"selected": sel_image},
+//     ];
+
+//     $.ajax({
+//         type: "POST",
+//         url: "/selected/",
+//         data: JSON.stringify(settings_arr),
+//         contentType: "application/json",
+//         dataType:"json",
+//     });
+// }
 

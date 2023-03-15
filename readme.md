@@ -26,6 +26,10 @@ Album, Artist |  Original Album Cover | Spotiscreen Display
 :-------------------------:|:-------------------------:|:-------------------------:
 Ignorance is Bliss, Skepta | <img src="Media\Photos\Skepta_-_Ignorance_Is_Bliss.png" alt="Ignorance is Bliss Cover" width="200"/>  |  <img src="Media\Photos\iib.jpg" alt="Ignorance is Bliss Spotiscreen" width="200"/> 
 
+## Control Panel
+The control panel is currently work in progress, it can be found on the client branch. A screenshot below shows the client:
+<img src="Media\client.png" alt="client" width="600"/>
+
 ## Hardware
 These photos show the hardware design of the system:
 <img src="Media\Photos\Front.jpg" alt="System" width="300"/> | <img src="Media\Photos\Back.jpg" alt="System" width="300"/>

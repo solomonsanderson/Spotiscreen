@@ -13,8 +13,8 @@ from get_weather import get_weather
 import configparser
 import datetime
 
-
-if platform.platform() != "Windows-10-10.0.19044-SP0":
+print(platform.platform())
+if platform.platform() != "Windows-10-10.0.19045-SP0":
     from rgbmatrix import RGBMatrix, RGBMatrixOptions, graphics
 
 scope = "user-read-playback-state"
@@ -43,7 +43,7 @@ class matrix:
         self.prev_art_url = None
         self.token_status = True
 
-        if platform.platform() != "Windows-10-10.0.19044-SP0":
+        if platform.platform() != "Windows-10-10.0.19045-SP0":
             options = RGBMatrixOptions()
             options.rows = self.width
             options.chain_length = 1
@@ -65,7 +65,7 @@ class matrix:
         if int(config["settings"]["brightness"]) != self.brightness:
             print("brightness changed")
             self.brightness = int(config["settings"]["brightness"])
-            if platform.platform() != "Windows-10-10.0.19044-SP0":
+            if platform.platform() != "Windows-10-10.0.19045-SP0":
                 options = RGBMatrixOptions()
                 options.rows = self.width
                 options.chain_length = 1
@@ -132,7 +132,7 @@ class matrix:
                         print("display weather")
                         response = requests.get(icon_url)
                         cover = Image.open(BytesIO(response.content))
-                        if platform.platform() != "Windows-10-10.0.19044-SP0":
+                        if platform.platform() != "Windows-10-10.0.19045-SP0":
                             cover.thumbnail((self.matrix.width, self.matrix.height), Image.ANTIALIAS)
                             self.matrix.SetImage(cover.convert("RGB"))
 
@@ -141,14 +141,14 @@ class matrix:
 
 
                 elif idle_display == "time":
-                    print("display time")
-
-                    white = graphics.Color(0, 0, 0)
-                    time = datetime.datetime.now()
-                    print(time)
-                    font = graphics.Font()
-                    font.LoadFont("../../../fonts/7x13.bdf")
-                    graphics.DrawText(self.matrix, font, 2, 10, white, time)
+                    if platform.platform() != "Windows-10-10.0.19045-SP0":
+                        print("display time")
+                        white = graphics.Color(0, 0, 0)
+                        time = datetime.datetime.now()
+                        print(time)
+                        font = graphics.Font()
+                        font.LoadFont("../../../fonts/7x13.bdf")
+                        graphics.DrawText(self.matrix, font, 2, 10, white, time)
 
 
         else:
@@ -162,7 +162,7 @@ class matrix:
                 print("Updating Image")
                 response = requests.get(self.art_url)
                 cover = Image.open(BytesIO(response.content))
-                if platform.platform() != "Windows-10-10.0.19044-SP0":
+                if platform.platform() != "Windows-10-10.0.19045-SP0":
                     cover.thumbnail((self.matrix.width, self.matrix.height), Image.ANTIALIAS)
                     self.matrix.SetImage(cover.convert("RGB"))
                 self.prev_art_url = self.art_url

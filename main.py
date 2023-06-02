@@ -156,8 +156,10 @@ class matrix:
                 elif idle_display == "time":
                     if platform.platform() != "Windows-10-10.0.19045-SP0":
                         print("display time")
-                        white = graphics.Color(0, 0, 0)
-                        time = datetime.datetime.now()
+                        self.prev_art_url = "time"
+                        white = graphics.Color(100, 100, 100)
+                        date_and_time = datetime.datetime.now()
+                        time = date_and_time[10:15]
                         print(time)
                         font = graphics.Font()
                         font.LoadFont("fonts/7x13.bdf")

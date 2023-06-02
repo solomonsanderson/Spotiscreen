@@ -157,13 +157,14 @@ class matrix:
                     if platform.platform() != "Windows-10-10.0.19045-SP0":
                         print("display time")
                         self.prev_art_url = "time"
-                        white = graphics.Color(100, 100, 100)
+                        white = graphics.Color(100, 0, 0)
                         date_and_time = datetime.datetime.now()
                         time = str(date_and_time)[11:16]
                         print(time)
                         font = graphics.Font()
                         font.LoadFont("fonts/7x13.bdf")
-                        graphics.DrawText(self.matrix, font, 2, 10, white, str(time))
+                        self.matrix.clear()
+                        graphics.DrawText(self.matrix, font, 1, 15, white, str(time))
 
 
         else:

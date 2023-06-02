@@ -161,7 +161,7 @@ class matrix:
                         print(time)
                         font = graphics.Font()
                         font.LoadFont("fonts/7x13.bdf")
-                        graphics.DrawText(self.matrix, font, 2, 10, white, time)
+                        graphics.DrawText(self.matrix, font, 2, 10, white, str(time))
 
 
         else:

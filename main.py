@@ -79,6 +79,12 @@ class matrix:
                 self.matrix = RGBMatrix(options = options)
 
 
+    def update_onoff(self):
+        config = configparser.ConfigParser()
+        config.read("settings.ini")
+        if config["settings"]["onoff"] == False:
+            self.matrix.SetImage(None)
+
     def play_status(self, playback):
         '''Gets the playback state of the spotify account, returns False if paused and True if playing '''
     

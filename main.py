@@ -46,11 +46,13 @@ class matrix:
         if platform.platform() != "Windows-10-10.0.19045-SP0":
             options = RGBMatrixOptions()
             options.rows = self.width
+            options.cols = self.height
             options.chain_length = 1
             options.parallel = 1
             options.hardware_mapping = "regular"
             options.limit_refresh_rate_hz = 100
             options.brightness = self.brightness
+            options.drop_privileges = False
             self.matrix = RGBMatrix(options = options)
         
         self.pause_time = None
@@ -68,6 +70,7 @@ class matrix:
             if platform.platform() != "Windows-10-10.0.19045-SP0":
                 options = RGBMatrixOptions()
                 options.rows = self.width
+                options.cols = self.height
                 options.chain_length = 1
                 options.parallel = 1
                 options.hardware_mapping = "regular"
@@ -132,6 +135,7 @@ class matrix:
                         print("display weather")
                         response = requests.get(icon_url)
                         cover = Image.open(BytesIO(response.content))
+                        self.prev_art_url = "weather"
                         if platform.platform() != "Windows-10-10.0.19045-SP0":
                             cover.thumbnail((self.matrix.width, self.matrix.height), Image.ANTIALIAS)
                             self.matrix.SetImage(cover.convert("RGB"))
@@ -139,7 +143,7 @@ class matrix:
                 elif idle_display == "image":
                     print("display image")
 
-
+ 
                 elif idle_display == "time":
                     if platform.platform() != "Windows-10-10.0.19045-SP0":
                         print("display time")

@@ -114,6 +114,6 @@ if __name__ == "__main__":
     # recording_on = 
     p = Process(target = matrix_loop)
     p.start()
-    app.run(debug=True, use_reloader = False)
+    app.run(host="192.168.0.14", port = 5000, debug=True, use_reloader = False)
     p.join()
     

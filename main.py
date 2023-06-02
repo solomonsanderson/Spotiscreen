@@ -159,7 +159,7 @@ class matrix:
                         self.prev_art_url = "time"
                         white = graphics.Color(100, 100, 100)
                         date_and_time = datetime.datetime.now()
-                        time = str(date_and_time)[10:15]
+                        time = str(date_and_time)[11:16]
                         print(time)
                         font = graphics.Font()
                         font.LoadFont("fonts/7x13.bdf")

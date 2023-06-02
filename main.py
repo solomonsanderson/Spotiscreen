@@ -82,8 +82,11 @@ class matrix:
     def update_onoff(self):
         config = configparser.ConfigParser()
         config.read("settings.ini")
-        if config["settings"]["onoff"] == False:
-            self.matrix.SetImage(None)
+        if platform.platform() != "Windows-10-10.0.19045-SP0":
+            if config["settings"]["onoff"] == False:
+                print("off")
+                self.matrix.SetImage(None)
+
 
     def play_status(self, playback):
         '''Gets the playback state of the spotify account, returns False if paused and True if playing '''
@@ -157,7 +160,7 @@ class matrix:
                         time = datetime.datetime.now()
                         print(time)
                         font = graphics.Font()
-                        font.LoadFont("../../../fonts/7x13.bdf")
+                        font.LoadFont("fonts/7x13.bdf")
                         graphics.DrawText(self.matrix, font, 2, 10, white, time)
 
 

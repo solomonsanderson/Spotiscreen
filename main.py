@@ -85,7 +85,7 @@ class matrix:
         if platform.platform() != "Windows-10-10.0.19045-SP0":
             if config["settings"]["onoff"] == False:
                 print("off")
-                self.matrix.SetImage(None)
+                self.matrix.Clear()
 
 
     def play_status(self, playback):
@@ -161,11 +161,13 @@ class matrix:
                         date_and_time = datetime.datetime.now()
                         time = str(date_and_time)[11:16]
                         print(time)
+                        hour = time[0:2]
+                        minute = time[-2:]
                         font = graphics.Font()
                         font.LoadFont("fonts/7x13.bdf")
                         font.CharacterWidth(10)
                         self.matrix.Clear()
-                        graphics.DrawText(self.matrix, font, 0, 15, white, str(time))
+                        graphics.DrawText(self.matrix, font, 0, 15, white, str(hour + "\n" + minute))
 
 
         else:

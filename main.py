@@ -163,8 +163,9 @@ class matrix:
                         print(time)
                         font = graphics.Font()
                         font.LoadFont("fonts/7x13.bdf")
-                        self.matrix.clear()
-                        graphics.DrawText(self.matrix, font, 1, 15, white, str(time))
+                        font.CharacterWidth(10)
+                        self.matrix.Clear()
+                        graphics.DrawText(self.matrix, font, 0, 15, white, str(time))
 
 
         else:

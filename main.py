@@ -52,7 +52,7 @@ class matrix:
             options.hardware_mapping = "regular"
             options.limit_refresh_rate_hz = 100
             options.brightness = self.brightness
-            options.drop_privileges = False
+            # options.drop_privileges = False
             self.matrix = RGBMatrix(options = options)
         
         self.pause_time = None
@@ -80,6 +80,7 @@ class matrix:
 
 
     def update_onoff(self):
+        print("update on off")
         config = configparser.ConfigParser()
         config.read("settings.ini")
         if platform.platform() != "Windows-10-10.0.19045-SP0":
@@ -164,7 +165,7 @@ class matrix:
                         hour = time[0:2]
                         minute = time[-2:]
                         font = graphics.Font()
-                        font.LoadFont("fonts/7x13.bdf")
+                        font.LoadFont("fonts/9x15B.bdf")
                         # font.CharacterWidth(10)
                         self.matrix.Clear()
                         graphics.DrawText(self.matrix, font, 16, 11, white, str(hour))

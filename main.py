@@ -169,8 +169,8 @@ class matrix:
                         font.LoadFont("fonts/9x15B.bdf")
                         # font.CharacterWidth(10)
                         self.matrix.Clear()
-                        graphics.DrawText(self.matrix, font, 16, 11, white, str(hour))
-                        graphics.DrawText(self.matrix, font, 16, 21, white, str(minute))
+                        graphics.DrawText(self.matrix, font, 15, 14, white, str(hour))
+                        graphics.DrawText(self.matrix, font, 15, 24, white, str(minute))
                         
                                     
 

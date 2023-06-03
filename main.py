@@ -83,6 +83,7 @@ class matrix:
         print("update on off")
         config = configparser.ConfigParser()
         config.read("settings.ini")
+        print(config["settings"]["onoff"])
         if platform.platform() != "Windows-10-10.0.19045-SP0":
             if config["settings"]["onoff"] == False:
                 print("off")

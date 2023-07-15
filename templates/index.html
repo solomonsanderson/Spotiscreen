@@ -1,74 +1,60 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title>Spotiscreen Control Panel</title>
-    <meta charset="UTF-8">
-    <meta author="Solomon Sanderson">
-    <link rel="stylesheet" href="{{url_for('static', filename='styles/styles.css')}}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="{{ url_for('static', filename='JS/interface.js')}}" ></script>
-</head>
-<body class="body">
-    <div class="container" id="container">
-        <div class="onoff"><h2>On/Off Toggle</h2>
-            <form action="/update/" method="POST">
-                <input type="checkbox" id="onoffcheck" name="onoffbox" class ="checkbox" checked>
-            </form>
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        </div>
-        <div class="brightness"><h2>Brightness Control</h2>
-            <div id="slider" class="slider">
-                <form action="/brightness/" method="POST">
-                    <input type="range" min="1" max="100" value="50" class="slider" id="brightslide">
-                </form>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="..\static\styles\styles.css"></link>
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <div class = "container">
+        <div class="title"></div>
+        <h1>Spotiscreen</h1>
+        <br>
+        <br>
+        <div class="card-columns">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class = "card-title">Control</h3>on off <br> brightness
+                </div>
             </div>
-        </div>
-        <div class="display"><h2>Display Settings</h2>
-            <div>
-                Select what to display when the display is idle (no music is playing)
-                <form action="/display/" method="POST">
-                    <select name="information" id="setting" class="setting">
-                        <option value="weather">Weather</option>
-                        <option value="image">Image</option>
-                        <option value="time">Time</option>
-                    </select>
-                </form>
+            <div class="card">
+                <div class = "card-body">
+                    <h3 class = "card-title">Connection Status</h3>on off <br> brightness
+                </div>
             </div>
-            <div id = "file_upload">
-              Upload an image:
-              <form action = "/success" method = "post" id = "file_upload" enctype="multipart/form-data">
-                <input id="fileupload" name="fileupload" type = "file" accept="image/*" />
-                <input type="submit" value="submit" id="submit" />
-              </form>
+            <div class="card">
+                <div class = "card-body">
+                    <h3 class = "card-title">Credentials</h3>on off <br> brightness
+                </div>
+                lorem
             </div>
-            Choose Image:
-            <div id="select">
-                <form>
-                  <select name="file_select" id = "file_select" action="/" method = "POST">
-                    {% for o in data %}
-                    <option value = "{{ o.name }}">{{ o.name }}</option>
-                    {% endfor %}
-                  </select>
-                </form>
+            <div class="card">
+                <div class = "card-body">
+                    <h3 class = "card-title">Control</h3>on off <br> brightness
+                </div>
+                ipsum
             </div>
-            <br>
-            <div>
-                The length of time after music has stopped playing before idling (Seconds)
-                <!-- <form acton="/timeout/" method="POST">
-                    <input type="number" id="timeout" class="timeout">
-                </form> -->
+            <div class="card">
+                <div class = "card-body">
+                    <h3 class = "card-title">Control</h3>on off <br> brightness
+                </div>
+                dolor
             </div>
-        </div>
-        <div class="random">
-            <a href="https://github.com/solomonsanderson/Spotiscreen">
-                <img src="{{url_for('static', filename='spotiscreen.png')}}" align="middle" width=100%/>
-            </a>
+            <div class="card" id="logo_box">
+                <img src="..\static\spotiscreen.png" href="https://github.com/solomonsanderson/Spotiscreen"></img>
+            </div>
         </div>
     </div>
-    <script type="text/javascript">
-        // alert(document.readyState);
-        addEventListener("change", get_settings);
-    </script>
-</body>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
 </html>

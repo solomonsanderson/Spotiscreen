@@ -105,6 +105,7 @@ def select_image():
 
 def matrix_loop():
     mat = matrix()
+    print("matrix initialised")
     while True:
         mat.update()
         mat.update_brightness()
